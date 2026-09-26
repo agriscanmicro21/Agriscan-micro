@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b3d2e">
+<title>AgriScan Micro</title>
+
+<style>
+:root{
+  --green:#0b3d2e;
+  --green2:#176b4d;
+  --lime:#8bd450;
+  --cream:#f5f7ed;
+  --white:#ffffff;
+  --text:#17352a;
+  --muted:#6b7d73;
+  --orange:#f2a93b;
+  --red:#dc5b4f;
+  --blue:#4b9fd8;
+  --shadow:0 12px 30px rgba(11,61,46,.12);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--cream);
+  color:var(--text);
+}
+
+body.large-text{
+  font-size:118%;
+}
+
+body.high-contrast{
+  --cream:#fff;
+  --white:#fff;
+  --text:#000;
+  --green:#000;
+  --green2:#000;
+  --lime:#ff0;
+  --muted:#222;
+}
+
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(245,247,237,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(11,61,46,.1);
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  color:var(--green);
+  font-size:1.1rem;
+}
+
+.brand span{
+  font-size:1.7rem;
+}
+
+.navlinks{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.navlinks button{
+  border:0;
+  background:transparent;
+  color:var(--text);
+  padding:8px 10px;
+  border-radius:10px;
+}
+
+.navlinks button:hover{
+  background:#dfeee5;
+}
+
+.hero{
+  max-width:1200px;
+  margin:auto;
+  padding:60px 20px 30px;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:30px;
+  align-items:center;
+}
+
+.heroCard{
+  background:linear-gradient(135deg,#0b3d2e,#176b4d);
+  color:white;
+  border-radius:30px;
+  padding:42px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.heroCard:after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  background:rgba(139,212,80,.14);
+  right:-80px;
+  top:-80px;
+}
+
+.eyebrow{
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--lime);
+  font-size:.82rem;
+}
+
+h1{
+  font-size:clamp(2.5rem,7vw,5rem);
+  line-height:.95;
+  margin:14px 0;
+}
+
+h2{
+  margin-top:0;
+}
+
+.hero p{
+  font-size:1.08rem;
+  line-height:1.65;
+  max-width:650px;
+}
+
+.cta{
+  border:0;
+  background:var(--lime);
+  color:#123b27;
+  font-weight:900;
+  padding:14px 20px;
+  border-radius:14px;
+  margin-top:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.heroSide{
+  display:grid;
+  gap:15px;
+}
+
+.stat{
+  background:white;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+
+.stat strong{
+  display:block;
+  font-size:2rem;
+  color:var(--green);
+}
+
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:10px 20px 70px;
+}
+
+.section{
+  margin-top:28px;
+  scroll-margin-top:90px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.grid3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  background:var(--white);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(11,61,46,.06);
+}
+
+.card h3{
+  margin-top:0;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select{
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd9d0;
+  border-radius:12px;
+  background:white;
+  color:var(--text);
+  margin-bottom:13px;
+}
+
+input[type="file"]{
+  width:100%;
+  padding:10px;
+  background:#eef5ef;
+  border-radius:12px;
+}
+
+.action{
+  background:var(--green);
+  color:white;
+  border:0;
+  padding:11px 15px;
+  border-radius:12px;
+  font-weight:800;
+}
+
+.secondary{
+  background:#e4efe8;
+  color:var(--green);
+  border:0;
+  padding:11px 15px;
+  border-radius:12px;
+  font-weight:800;
+}
+
+.danger{
+  background:#f7dcd9;
+  color:#8c251e;
+  border:0;
+  padding:11px 15px;
+  border-radius:12px;
+  font-weight:800;
+}
+
+.preview{
+  width:100%;
+  max-height:330px;
+  object-fit:cover;
+  border-radius:18px;
+  display:none;
+  margin-top:15px;
+}
+
+.scanBox{
+  text-align:center;
+  padding:30px 20px;
+  background:linear-gradient(145deg,#edf8ee,#fff);
+  border-radius:20px;
+}
+
+.scanCircle{
+  width:150px;
+  height:150px;
+  margin:10px auto 20px;
+  border-radius:50%;
+  border:10px solid #dbeedc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2.4rem;
+  position:relative;
+}
+
+.scanCircle.scanning{
+  animation:pulse 1s infinite;
+  border-color:var(--lime);
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.08);box-shadow:0 0 0 18px rgba(139,212,80,.12)}
+}
+
+.meter{
+  height:22px;
+  background:#e4ebe6;
+  border-radius:30px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.meterFill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#65bd63,#f2c94c,#dc5b4f);
+  transition:width 1.2s;
+}
+
+.riskNumber{
+  font-size:3rem;
+  font-weight:950;
+  color:var(--green);
+}
+
+.clue{
+  padding:14px;
+  border-left:5px solid var(--lime);
+  background:#f1f8f1;
+  border-radius:10px;
+  margin:10px 0;
+}
+
+.actionItem{
+  display:flex;
+  gap:12px;
+  padding:13px;
+  background:#f5f8f5;
+  border-radius:13px;
+  margin:9px 0;
+}
+
+.icon{
+  font-size:1.4rem;
+}
+
+.timeline{
+  position:relative;
+  padding-left:25px;
+}
+
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:6px;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:#cfe2d5;
+}
+
+.event{
+  position:relative;
+  margin-bottom:20px;
+}
+
+.event:before{
+  content:"";
+  position:absolute;
+  left:-25px;
+  top:3px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--green2);
+}
+
+.map{
+  height:260px;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 25% 35%,rgba(139,212,80,.5) 0 5%,transparent 6%),
+    radial-gradient(circle at 65% 60%,rgba(75,159,216,.45) 0 7%,transparent 8%),
+    linear-gradient(135deg,#dcefdc,#eef4df);
+  position:relative;
+  overflow:hidden;
+}
+
+.map:before{
+  content:"";
+  position:absolute;
+  width:130%;
+  height:25px;
+  background:rgba(75,159,216,.4);
+  transform:rotate(-20deg);
+  top:100px;
+  left:-15%;
+}
+
+.mapPin{
+  position:absolute;
+  background:var(--red);
+  color:white;
+  border-radius:50% 50% 50% 0;
+  width:28px;
+  height:28px;
+  transform:rotate(-45deg);
+}
+
+.mapPin span{
+  transform:rotate(45deg);
+  display:block;
+  text-align:center;
+  line-height:28px;
+}
+
+.weatherIcon{
+  font-size:3rem;
+}
+
+.bigNumber{
+  font-size:2.6rem;
+  font-weight:900;
+}
+
+.tag{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:99px;
+  background:#e2f1e5;
+  color:var(--green);
+  font-weight:800;
+  margin:3px;
+  font-size:.8rem;
+}
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.dayName{
+  font-weight:900;
+  text-align:center;
+  padding:6px;
+  font-size:.8rem;
+}
+
+.day{
+  min-height:65px;
+  border:1px solid #dce6df;
+  background:white;
+  border-radius:9px;
+  padding:6px;
+  cursor:pointer;
+}
+
+.day:hover{
+  background:#edf7ee;
+}
+
+.day.today{
+  outline:3px solid var(--lime);
+}
+
+.day.selected{
+  background:#dcefe2;
+}
+
+.day .eventDot{
+  width:7px;
+  height:7px;
+  background:var(--orange);
+  border-radius:50%;
+  display:inline-block;
+}
+
+.musicControls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.musicStatus{
+  padding:14px;
+  background:#eef5ef;
+  border-radius:13px;
+  margin-bottom:15px;
+}
+
+.gameWrap{
+  background:linear-gradient(#bfe8ff 0 55%,#77b956 55%);
+  border-radius:24px;
+  padding:18px;
+  overflow:hidden;
+}
+
+.gameTop{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  background:rgba(255,255,255,.9);
+  padding:12px;
+  border-radius:15px;
+  margin-bottom:10px;
+  font-weight:900;
+}
+
+#game{
+  width:100%;
+  height:390px;
+  display:block;
+  border-radius:17px;
+  background:linear-gradient(#bfe8ff 0 55%,#7fc75b 55%);
+  touch-action:none;
+}
+
+.gameControls{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:12px;
+}
+
+.gameControls button{
+  width:62px;
+  height:48px;
+  border:0;
+  border-radius:13px;
+  background:white;
+  font-size:1.4rem;
+  font-weight:900;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.progress{
+  height:12px;
+  background:#e2ebe4;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress div{
+  height:100%;
+  width:0;
+  background:var(--green2);
+  transition:.4s;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  background:var(--green);
+  color:white;
+}
+
+.small{
+  font-size:.85rem;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+body.simple .extra-detail{
+  display:none;
+}
+
+@media(max-width:850px){
+  .hero,
+  .grid,
+  .grid3{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding-top:30px;
+  }
+
+  .heroCard{
+    padding:28px;
+  }
+
+  .nav{
+    align-items:flex-start;
+  }
+
+  .navlinks{
+    max-width:60%;
+  }
+
+  h1{
+    font-size:3.1rem;
+  }
+}
+
+@media(max-width:550px){
+  .navlinks button{
+    font-size:.75rem;
+    padding:6px;
+  }
+
+  .heroCard{
+    border-radius:22px;
+  }
+
+  .card{
+    padding:17px;
+  }
+
+  #game{
+    height:330px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <span>🌱</span>
+      <div>AgriScan Micro</div>
+    </div>
+
+    <div class="navlinks">
+      <button onclick="scrollToId('scan')">Scan</button>
+      <button onclick="scrollToId('weather')">Weather</button>
+      <button onclick="scrollToId('calendar')">Calendar</button>
+      <button onclick="scrollToId('music')">Music</button>
+      <button onclick="scrollToId('gameSection')">Game</button>
+      <button onclick="scrollToId('settings')">⚙️</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="heroCard">
+    <div class="eyebrow" id="heroEyebrow">EARLY CROP WARNING PROTOTYPE</div>
+
+    <h1 id="heroTitle">AgriScan<br>Micro</h1>
+
+    <p id="heroText">
+      Catch the warning signs before the problem spreads.
+      Use visible crop signals, environmental indicators and farm memory
+      to decide when closer inspection may be needed.
+    </p>
+
+    <button class="cta" onclick="scrollToId('scan')">
+      START MY FARM →
+    </button>
+
+    <p class="small" style="color:#d9eee0;margin-top:20px">
+      🔬 Small signals. Earlier action. Healthier crops.
+    </p>
+  </div>
+
+  <div class="heroSide">
+    <div class="stat">
+      <strong>8</strong>
+      Languages
+      <div class="small">Designed for farmers and communities worldwide.</div>
+    </div>
+
+    <div class="stat">
+      <strong>1</strong>
+      Farm dashboard
+      <div class="small">Scan, weather, calendar, memory, music and game in one place.</div>
+    </div>
+
+    <div class="stat">
+      <strong>∞</strong>
+      Local farm memories
+      <div class="small">Saved directly on the device using local storage.</div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- FARM PROFILE -->
+<section class="section" id="farm">
+  <div class="card">
+    <h2>🌾 Farm Profile</h2>
+
+    <div class="grid">
+      <div>
+        <label>Farmer / Farm name</label>
+        <input id="farmName" type="text" placeholder="My Farm">
+      </div>
+
+      <div>
+        <label>Farm location</label>
+        <select id="farmLocation">
+          <option>Kuala Lumpur, Malaysia</option>
+          <option>Kuching, Sarawak</option>
+          <option>Selangor, Malaysia</option>
+          <option>Penang, Malaysia</option>
+          <option>Johor, Malaysia</option>
+          <option>Thailand</option>
+          <option>India</option>
+          <option>Other / Custom</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Crop</label>
+        <select id="crop">
+          <option>Rice</option>
+          <option>Tomato</option>
+          <option>Maize</option>
+          <option>Chili</option>
+          <option>Potato</option>
+          <option>Cucumber</option>
+          <option>Other crop</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Farm area (hectares)</label>
+        <input id="area" type="number" min="0" step="0.1" value="1">
+      </div>
+    </div>
+
+    <button class="action" onclick="saveFarm()">💾 Save Farm</button>
+    <span id="farmSaved" class="tag hidden">Saved!</span>
+  </div>
+</section>
+
+
+<!-- CROP VALUE -->
+<section class="section">
+  <div class="grid">
+    <div class="card">
+      <h2>💰 Crop Value Estimate</h2>
+
+      <label>Estimated yield per hectare (kg)</label>
+      <input id="yield" type="number" value="3000">
+
+      <label>Estimated price per kg</label>
+      <input id="price" type="number" value="2">
+
+      <button class="action" onclick="estimateValue()">Calculate</button>
+
+      <div id="valueResult" style="margin-top:15px;font-size:1.4rem;font-weight:900">
+        Estimated value: —
+      </div>
+
+      <p class="small extra-detail">
+        Demo estimate only. Actual crop value depends on crop,
+        market conditions, quality, location and season.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>🌱 Farm Snapshot</h2>
+      <div id="snapshot">
+        Set your farm profile to create a snapshot.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SCAN -->
+<section class="section" id="scan">
+  <div class="card">
+    <h2>🔬 Micro Scan</h2>
+
+    <p>
+      Upload a crop photo to explore visible warning signals.
+      This prototype does <strong>not</strong> diagnose disease.
+    </p>
+
+    <input id="cropPhoto" type="file" accept="image/*">
+
+    <img id="photoPreview" class="preview">
+
+    <div class="scanBox" style="margin-top:18px">
+
+      <div class="scanCircle" id="scanCircle">🔬</div>
+
+      <button class="action" onclick="runScan()">
+        START MICRO SCAN
+      </button>
+
+      <div id="scanStatus" style="margin-top:15px;font-weight:800">
+        Ready for a demonstration scan.
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- RISK -->
+<section class="section">
+  <div class="grid">
+
+    <div class="card">
+      <h2>📊 Micro Risk Meter</h2>
+
+      <div class="riskNumber" id="riskNumber">—</div>
+
+      <div class="meter">
+        <div class="meterFill" id="meterFill"></div>
+      </div>
+
+      <div id="riskLabel">
+        Run a scan to generate the demonstration risk indicator.
+      </div>
+
+      <p class="small extra-detail">
+        The meter combines demonstration indicators such as visible
+        crop clues and environmental conditions. It is not a medical,
+        veterinary, or agricultural diagnosis.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>🕵️ Crop Detective</h2>
+
+      <div id="clues">
+        <p>🔎 Your clues will appear after a scan.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ACTION PLAN -->
+<section class="section">
+  <div class="card">
+    <h2>🚨 Early Action Plan</h2>
+
+    <div id="actionPlan">
+      <div class="actionItem">
+        <span class="icon">📸</span>
+        <div>
+          <strong>Inspect</strong>
+          <br>
+          Take clear photos of affected leaves or fruit.
+        </div>
+      </div>
+
+      <div class="actionItem">
+        <span class="icon">🌿</span>
+        <div>
+          <strong>Compare</strong>
+          <br>
+          Compare nearby healthy and affected plants.
+        </div>
+      </div>
+
+      <div class="actionItem">
+        <span class="icon">🌧️</span>
+        <div>
+          <strong>Watch conditions</strong>
+          <br>
+          Monitor moisture, rain and humidity-related warning signs.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WEATHER -->
+<section class="section" id="weather">
+  <div class="card">
+    <h2>🌦️ Weather Center</h2>
+
+    <div class="grid3">
+
+      <div class="card">
+        <div class="weatherIcon">🌧️</div>
+        <div class="bigNumber">72%</div>
+        <strong>Rain chance</strong>
+        <p class="small">Demo environmental indicator.</p>
+      </div>
+
+      <div class="card">
+        <div class="weatherIcon">💧</div>
+        <div class="bigNumber">81%</div>
+        <strong>Moisture</strong>
+        <p class="small">Demo soil/environment indicator.</p>
+      </div>
+
+      <div class="card">
+        <div class="weatherIcon">☁️</div>
+        <div class="bigNumber">29°C</div>
+        <strong>Temperature</strong>
+        <p class="small">Demonstration reading.</p>
+      </div>
+
+    </div>
+
+    <div class="clue">
+      🌧️ <strong>Weather warning:</strong>
+      Extended wet conditions may be worth monitoring alongside crop symptoms.
+    </div>
+
+    <p class="small extra-detail">
+      This offline prototype uses demonstration values. It does not fetch live weather data.
+    </p>
+  </div>
+</section>
+
+
+<!-- RISK MAP -->
+<section class="section">
+  <div class="grid">
+
+    <div class="card">
+      <h2>🗺️ Farm Risk Map</h2>
+
+      <div class="map">
+        <div class="mapPin" style="left:25%;top:35%">
+          <span>!</span>
+        </div>
+
+        <div class="mapPin" style="left:64%;top:60%">
+          <span>!</span>
+        </div>
+
+        <div class="mapPin" style="left:43%;top:75%">
+          <span>!</span>
+        </div>
+      </div>
+
+      <p class="small">
+        Demonstration map showing areas that may deserve closer inspection.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>📈 Plant Health Timeline</h2>
+
+      <div class="timeline">
+
+        <div class="event">
+          <strong>Today — Micro Scan</strong>
+          <div class="small">Visible signals reviewed.</div>
+        </div>
+
+        <div class="event">
+          <strong>Yesterday — Weather Watch</strong>
+          <div class="small">Wet-condition indicator recorded.</div>
+        </div>
+
+        <div class="event">
+          <strong>3 days ago — Farm Check</strong>
+          <div class="small">Routine inspection recorded.</div>
+        </div>
+
+        <div class="event">
+          <strong>1 week ago — Growth Check</strong>
+          <div class="small">Plant development noted.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CALENDAR -->
+<section class="section" id="calendar">
+  <div class="card">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <div>
+        <h2>📅 Farm Calendar</h2>
+        <p class="small">Mark planting, inspections, rain, fertilizing and harvest days.</p>
+      </div>
+
+      <div>
+        <button class="secondary" onclick="changeMonth(-1)">←</button>
+        <strong id="monthTitle"></strong>
+        <button class="secondary" onclick="changeMonth(1)">→</button>
+      </div>
+    </div>
+
+    <div class="calendar" id="calendarGrid"></div>
+
+    <div class="card" style="margin-top:18px">
+
+      <h3>➕ Add event</h3>
+
+      <label>Selected date</label>
+      <input id="eventDate" type="date">
+
+      <label>Event type</label>
+      <select id="eventType">
+        <option>🌱 Planting</option>
+        <option>💧 Irrigation</option>
+        <option>🌧️ Heavy Rain</option>
+        <option>🔬 Crop Inspection</option>
+        <option>🧪 Fertilizing</option>
+        <option>🌾 Harvest</option>
+        <option>⭐ Special Day</option>
+      </select>
+
+      <label>Note</label>
+      <input id="eventNote" type="text" placeholder="Example: Check tomato leaves">
+
+      <button class="action" onclick="addCalendarEvent()">Add Event</button>
+
+      <div id="eventList" style="margin-top:15px"></div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- MUSIC -->
+<section class="section" id="music">
+  <div class="card">
+
+    <h2>🎵 Farm Music Center</h2>
+
+    <div class="musicStatus" id="musicStatus">
+      Music is stopped.
+    </div>
+
+    <div class="musicControls">
+
+      <button class="action" onclick="startRain()">🌧️ Rain</button>
+
+      <button class="secondary" onclick="startWind()">💨 Wind</button>
+
+      <button class="danger" onclick="stopMusic()">🔇 Stop</button>
+
+    </div>
+
+    <br>
+
+    <label>🔊 Volume</label>
+    <input id="volume" type="range" min="0" max="1" value=".35" step=".01"
+           oninput="setVolume(this.value)">
+
+    <br><br>
+
+    <label>📁 Use your own music</label>
+    <input id="musicUpload" type="file" accept="audio/*">
+
+    <audio id="customAudio" controls style="width:100%;margin-top:12px;display:none"></audio>
+
+    <p class="small extra-detail">
+      Rain and wind ambience are generated locally in your browser.
+      Uploaded audio stays on your device for this session.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ACCESSIBILITY -->
+<section class="section" id="settings">
+  <div class="card">
+
+    <h2>⚙️ Accessibility & Language</h2>
+
+    <div class="grid">
+
+      <div>
+        <label>🌍 Language</label>
+
+        <select id="language" onchange="changeLanguage()">
+          <option value="en">English</option>
+          <option value="ms">Bahasa Melayu</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ar">العربية</option>
+          <option value="zh">中文</option>
+          <option value="ta">தமிழ்</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Accessibility</label>
+
+        <button class="secondary" onclick="toggleLargeText()">
+          🔎 Large Text
+        </button>
+
+        <button class="secondary" onclick="toggleContrast()">
+          ◐ High Contrast
+        </button>
+
+        <button class="secondary" onclick="toggleSimpleMode()">
+          👨‍🌾 Simple Farmer Mode
+        </button>
+
+        <button class="secondary" onclick="readPage()">
+          🔊 Read Aloud
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FARM MEMORY -->
+<section class="section">
+  <div class="card">
+
+    <h2>💾 Farm Memory</h2>
+
+    <p>
+      AgriScan Micro can remember local demo information on this device.
+    </p>
+
+    <div class="progress">
+      <div id="memoryProgress"></div>
+    </div>
+
+    <p id="memoryText" class="small">
+      No saved scan yet.
+    </p>
+
+    <button class="danger" onclick="clearMemory()">
+      Clear Local Memory
+    </button>
+
+  </div>
+</section>
+
+
+<!-- GAME -->
+<section class="section" id="gameSection">
+
+  <div class="card">
+
+    <h2>🚜 Crop Rescue — Crop Detective Game</h2>
+
+    <p>
+      Drive the tractor, collect useful evidence and avoid hazards!
+      Complete the mission before time runs out.
+    </p>
+
+    <div class="gameWrap">
+
+      <div class="gameTop">
+        <span>⭐ Score: <b id="gameScore">0</b></span>
+        <span>❤️ Lives: <b id="gameLives">3</b></span>
+        <span>🏆 Level: <b id="gameLevel">1</b></span>
+        <span>⏱️ <b id="gameTime">30</b>s</span>
+      </div>
+
+      <canvas id="game" width="900" height="390"></canvas>
+
+      <div class="gameControls">
+        <button id="leftBtn">⬅️</button>
+        <button id="upBtn">⬆️</button>
+        <button id="downBtn">⬇️</button>
+        <button id="rightBtn">➡️</button>
+      </div>
+
+      <div style="text-align:center;margin-top:12px">
+        <button class="action" onclick="startGame()">🚜 START / RESTART</button>
+      </div>
+
+    </div>
+
+    <div id="gameMessage" class="clue" style="margin-top:15px">
+      Mission: collect evidence 🌿 🔍 💧 while avoiding pests 🐛.
+    </div>
+
+  </div>
+</section>
+
+
+<!-- REPORT -->
+<section class="section">
+  <div class="card">
+
+    <h2>📄 Farmer Report</h2>
+
+    <div id="report">
+      <strong>AgriScan Micro — Demonstration Report</strong>
+      <p>Run a scan to generate your report.</p>
+    </div>
+
+    <button class="action" onclick="window.print()">🖨️ Print Report</button>
+    <button class="secondary" onclick="shareReport()">📤 Share</button>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>🌱 AgriScan Micro</strong>
+  <p>Small signals. Earlier action. Healthier crops.</p>
+  <p class="small" style="color:#d8e9de">
+    Prototype demonstration only. AgriScan Micro does not diagnose crop disease.
+  </p>
+</footer>
+
+
+<script>
+
+/* =========================
+   BASIC HELPERS
+========================= */
+
+function scrollToId(id){
+  document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
+}
+
+
+/* =========================
+   PHOTO PREVIEW
+========================= */
+
+const cropPhoto=document.getElementById("cropPhoto");
+const photoPreview=document.getElementById("photoPreview");
+
+cropPhoto.addEventListener("change",function(){
+  const file=this.files[0];
+
+  if(!file) return;
+
+  const url=URL.createObjectURL(file);
+
+  photoPreview.src=url;
+  photoPreview.style.display="block";
+});
+
+
+/* =========================
+   FARM PROFILE
+========================= */
+
+function saveFarm(){
+
+  const data={
+    name:document.getElementById("farmName").value || "My Farm",
+    location:document.getElementById("farmLocation").value,
+    crop:document.getElementById("crop").value,
+    area:document.getElementById("area").value
+  };
+
+  localStorage.setItem("agriscanFarm",JSON.stringify(data));
+
+  document.getElementById("farmSaved").classList.remove("hidden");
+
+  updateSnapshot();
+  updateMemory();
+
+  setTimeout(()=>{
+    document.getElementById("farmSaved").classList.add("hidden");
+  },2000);
+}
+
+function loadFarm(){
+
+  const raw=localStorage.getItem("agriscanFarm");
+
+  if(!raw) return;
+
+  try{
+
+    const data=JSON.parse(raw);
+
+    document.getElementById("farmName").value=data.name || "";
+    document.getElementById("farmLocation").value=data.location || "Kuala Lumpur, Malaysia";
+    document.getElementById("crop").value=data.crop || "Rice";
+    document.getElementById("area").value=data.area || 1;
+
+  }catch(e){}
+
+  updateSnapshot();
+}
+
+function updateSnapshot(){
+
+  const name=document.getElementById("farmName").value || "My Farm";
+  const location=document.getElementById("farmLocation").value;
+  const crop=document.getElementById("crop").value;
+  const area=document.getElementById("area").value;
+
+  document.getElementById("snapshot").innerHTML=`
+    <div class="tag">🌱 ${crop}</div>
+    <div class="tag">📍 ${location}</div>
+    <div class="tag">📐 ${area} ha</div>
+    <p><strong>${escapeHTML(name)}</strong> is ready for a Micro Scan.</p>
+  `;
+}
+
+["farmName","farmLocation","crop","area"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",updateSnapshot);
+  document.getElementById(id).addEventListener("change",updateSnapshot);
+});
+
+
+/* =========================
+   VALUE ESTIMATOR
+========================= */
+
+function estimateValue(){
+
+  const area=parseFloat(document.getElementById("area").value)||0;
+  const yieldPerHa=parseFloat(document.getElementById("yield").value)||0;
+  const price=parseFloat(document.getElementById("price").value)||0;
+
+  const total=area*yieldPerHa*price;
+
+  document.getElementById("valueResult").textContent=
+    "Estimated value: " + total.toLocaleString(undefined,{
+      style:"currency",
+      currency:"MYR"
+    });
+}
+
+
+/* =========================
+   MICRO SCAN
+========================= */
+
+let latestRisk=0;
+
+function runScan(){
+
+  const circle=document.getElementById("scanCircle");
+  const status=document.getElementById("scanStatus");
+
+  circle.classList.add("scanning");
+
+  status.textContent="Scanning visible warning signals…";
+
+  document.getElementById("riskNumber").textContent="…";
+
+  document.getElementById("meterFill").style.width="0%";
+
+  setTimeout(()=>{
+    status.textContent="Checking crop clues…";
+  },900);
+
+  setTimeout(()=>{
+    status.textContent="Comparing environmental indicators…";
+  },1800);
+
+  setTimeout(()=>{
+
+    circle.classList.remove("scanning");
+
+    latestRisk=86;
+
+    document.getElementById("riskNumber").textContent="86%";
+
+    document.getElementById("meterFill").style.width="86%";
+
+    document.getElementById("riskLabel").innerHTML=
+      "<strong>Higher attention recommended.</strong> " +
+      "This is a demonstration risk indicator, not a diagnosis.";
+
+    document.getElementById("clues").innerHTML=`
+
+      <div class="clue">
+        🌿 <strong>Clue 1:</strong>
+        Visible leaf changes may deserve closer inspection.
+      </div>
+
+      <div class="clue">
+        💧 <strong>Clue 2:</strong>
+        Moist conditions can increase the importance of monitoring.
+      </div>
+
+      <div class="clue">
+        🌧️ <strong>Clue 3:</strong>
+        Recent wet-weather conditions are a useful warning signal.
+      </div>
+
+      <div class="clue">
+        🔎 <strong>Detective tip:</strong>
+        Compare several plants instead of relying on one photo.
+      </div>
+    `;
+
+    document.getElementById("actionPlan").innerHTML=`
+
+      <div class="actionItem">
+        <span class="icon">📸</span>
+        <div>
+          <strong>1. Inspect closely</strong><br>
+          Photograph several affected and healthy plants.
+        </div>
+      </div>
+
+      <div class="actionItem">
+        <span class="icon">🧤</span>
+        <div>
+          <strong>2. Separate observation areas</strong><br>
+          Keep track of where unusual signs are appearing.
+        </div>
+      </div>
+
+      <div class="actionItem">
+        <span class="icon">🌧️</span>
+        <div>
+          <strong>3. Watch moisture</strong><br>
+          Monitor wet conditions and changes over the next few days.
+        </div>
+      </div>
+
+      <div class="actionItem">
+        <span class="icon">👩‍🌾</span>
+        <div>
+          <strong>4. Ask an agricultural specialist</strong><br>
+          Seek expert confirmation if symptoms continue or spread.
+        </div>
+      </div>
+    `;
+
+    document.getElementById("report").innerHTML=`
+
+      <strong>🌱 AgriScan Micro — Scan Report</strong>
+
+      <p>
+        <strong>Crop:</strong> ${escapeHTML(document.getElementById("crop").value)}
+      </p>
+
+      <p>
+        <strong>Location:</strong> ${escapeHTML(document.getElementById("farmLocation").value)}
+      </p>
+
+      <p>
+        <strong>Demonstration risk indicator:</strong> 86%
+      </p>
+
+      <p>
+        <strong>Recommended:</strong> closer inspection and environmental monitoring.
+      </p>
+
+      <p class="small">
+        Prototype only. This result does not diagnose disease.
+      </p>
+    `;
+
+    localStorage.setItem("agriscanLastScan",JSON.stringify({
+      date:new Date().toISOString(),
+      risk:latestRisk,
+      crop:document.getElementById("crop").value
+    }));
+
+    updateMemory();
+
+    status.textContent="Micro Scan complete — investigate the warning signals.";
+
+  },3000);
+}
+
+
+/* =========================
+   CALENDAR
+========================= */
+
+let calendarDate=new Date();
+
+let calendarEvents=JSON.parse(
+  localStorage.getItem("agriscanCalendar") || "{}"
+);
+
+let selectedDate=null;
+
+function renderCalendar(){
+
+  const grid=document.getElementById("calendarGrid");
+
+  grid.innerHTML="";
+
+  const year=calendarDate.getFullYear();
+  const month=calendarDate.getMonth();
+
+  document.getElementById("monthTitle").textContent=
+    calendarDate.toLocaleDateString(undefined,{
+      month:"long",
+      year:"numeric"
+    });
+
+  const names=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+  names.forEach(n=>{
+    const el=document.createElement("div");
+    el.className="dayName";
+    el.textContent=n;
+    grid.appendChild(el);
+  });
+
+  const first=new Date(year,month,1).getDay();
+
+  for(let i=0;i<first;i++){
+    const blank=document.createElement("div");
+    grid.appendChild(blank);
+  }
+
+  const days=new Date(year,month+1,0).getDate();
+
+  for(let d=1;d<=days;d++){
+
+    const el=document.createElement("div");
+    el.className="day";
+
+    const key=makeDateKey(year,month+1,d);
+
+    if(key===todayKey()) el.classList.add("today");
+
+    if(key===selectedDate) el.classList.add("selected");
+
+    const events=calendarEvents[key] || [];
+
+    el.innerHTML=`
+      <strong>${d}</strong>
+      ${events.length ? "<br><span class='eventDot'></span> "+events.length : ""}
+    `;
+
+    el.onclick=()=>{
+      selectedDate=key;
+      document.getElementById("eventDate").value=key;
+      renderCalendar();
+      renderEventList();
+    };
+
+    grid.appendChild(el);
+  }
+
+  renderEventList();
+}
+
+function makeDateKey(y,m,d){
+  return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+}
+
+function todayKey(){
+
+  const d=new Date();
+
+  return makeDateKey(
+    d.getFullYear(),
+    d.getMonth()+1,
+    d.getDate()
+  );
+}
+
+function changeMonth(direction){
+
+  calendarDate.setMonth(calendarDate.getMonth()+direction);
+
+  renderCalendar();
+}
+
+function addCalendarEvent(){
+
+  const date=document.getElementById("eventDate").value;
+
+  if(!date){
+    alert("Please select a date.");
+    return;
+  }
+
+  const type=document.getElementById("eventType").value;
+  const note=document.getElementById("eventNote").value || "Farm event";
+
+  if(!calendarEvents[date]) calendarEvents[date]=[];
+
+  calendarEvents[date].push({
+    type,
+    note
+  });
+
+  localStorage.setItem(
+    "agriscanCalendar",
+    JSON.stringify(calendarEvents)
+  );
+
+  selectedDate=date;
+
+  document.getElementById("eventNote").value="";
+
+  renderCalendar();
+}
+
+function renderEventList(){
+
+  const box=document.getElementById("eventList");
+
+  if(!selectedDate){
+
+    box.innerHTML="<p class='small'>Select a date to view events.</p>";
+
+    return;
+  }
+
+  const events=calendarEvents[selectedDate] || [];
+
+  if(!events.length){
+
+    box.innerHTML=
+      `<p class="small">No events on ${selectedDate}.</p>`;
+
+    return;
+  }
+
+  box.innerHTML=`
+    <strong>Events on ${selectedDate}</strong>
+    ${events.map((e,i)=>`
+      <div class="actionItem">
+        <div>
+          <strong>${escapeHTML(e.type)}</strong><br>
+          ${escapeHTML(e.note)}
+        </div>
+        <button class="danger" onclick="deleteEvent('${selectedDate}',${i})">×</button>
+      </div>
+    `).join("")}
+  `;
+}
+
+function deleteEvent(date,index){
+
+  calendarEvents[date].splice(index,1);
+
+  if(!calendarEvents[date].length){
+    delete calendarEvents[date];
+  }
+
+  localStorage.setItem(
+    "agriscanCalendar",
+    JSON.stringify(calendarEvents)
+  );
+
+  renderCalendar();
+}
+
+
+/* =========================
+   MUSIC ENGINE
+========================= */
+
+let audioContext=null;
+let noiseSource=null;
+let gainNode=null;
+let filterNode=null;
+
+function getAudio(){
+
+  if(!audioContext){
+
+    audioContext=new (window.AudioContext || window.webkitAudioContext)();
+
+    gainNode=audioContext.createGain();
+    gainNode.gain.value=.35;
+    gainNode.connect(audioContext.destination);
+
+    filterNode=audioContext.createBiquadFilter();
+    filterNode.type="lowpass";
+    filterNode.frequency.value=1200;
+  }
+
+  if(audioContext.state==="suspended"){
+    audioContext.resume();
+  }
+}
+
+function createNoise(){
+
+  getAudio();
+
+  const bufferSize=audioContext.sampleRate*2;
+
+  const buffer=audioContext.createBuffer(
+    1,
+    bufferSize,
+    audioContext.sampleRate
+  );
+
+  const data=buffer.getChannelData(0);
+
+  for(let i=0;i<bufferSize;i++){
+    data[i]=Math.random()*2-1;
+  }
+
+  const source=audioContext.createBufferSource();
+
+  source.buffer=buffer;
+  source.loop=true;
+
+  source.connect(filterNode);
+  filterNode.connect(gainNode);
+
+  noiseSource=source;
+
+  source.start();
+}
+
+function startRain(){
+
+  stopNoiseOnly();
+
+  getAudio();
+
+  filterNode.frequency.value=1700;
+
+  createNoise();
+
+  document.getElementById("musicStatus").textContent=
+    "🌧️ Rain ambience is playing.";
+}
+
+function startWind(){
+
+  stopNoiseOnly();
+
+  getAudio();
+
+  filterNode.frequency.value=550;
+
+  createNoise();
+
+  document.getElementById("musicStatus").textContent=
+    "💨 Wind ambience is playing.";
+}
+
+function stopNoiseOnly(){
+
+  if(noiseSource){
+
+    try{
+      noiseSource.stop();
+    }catch(e){}
+
+    noiseSource.disconnect();
+    noiseSource=null;
+  }
+}
+
+function stopMusic(){
+
+  stopNoiseOnly();
+
+  const audio=document.getElementById("customAudio");
+
+  audio.pause();
+
+  document.getElementById("musicStatus").textContent=
+    "🔇 Music is stopped.";
+}
+
+function setVolume(value){
+
+  if(gainNode){
+    gainNode.gain.value=parseFloat(value);
+  }
+
+  document.getElementById("customAudio").volume=parseFloat(value);
+}
+
+document.getElementById("musicUpload").addEventListener("change",function(){
+
+  const file=this.files[0];
+
+  if(!file) return;
+
+  const audio=document.getElementById("customAudio");
+
+  audio.src=URL.createObjectURL(file);
+
+  audio.style.display="block";
+
+  audio.volume=parseFloat(document.getElementById("volume").value);
+
+  audio.play();
+
+  document.getElementById("musicStatus").textContent=
+    "🎵 Your uploaded music is playing.";
+});
+
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+function toggleLargeText(){
+
+  document.body.classList.toggle("large-text");
+
+  localStorage.setItem(
+    "largeText",
+    document.body.classList.contains("large-text")
+  );
+}
+
+function toggleContrast(){
+
+  document.body.classList.toggle("high-contrast");
+
+  localStorage.setItem(
+    "contrast",
+    document.body.classList.contains("high-contrast")
+  );
+}
+
+function toggleSimpleMode(){
+
+  document.body.classList.toggle("simple");
+
+  localStorage.setItem(
+    "simple",
+    document.body.classList.contains("simple")
+  );
+}
+
+function readPage(){
+
+  if(!("speechSynthesis" in window)){
+    alert("Read Aloud is not supported by this browser.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const text=
+    document.getElementById("heroText").innerText+
+    ". "+
+    document.getElementById("riskLabel").innerText+
+    ". "+
+    document.getElementById("actionPlan").innerText;
+
+  const speech=new SpeechSynthesisUtterance(text);
+
+  speech.rate=.9;
+
+  speechSynthesis.speak(speech);
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+const translations={
+
+  en:{
+    eyebrow:"EARLY CROP WARNING PROTOTYPE",
+    title:"AgriScan Micro",
+    text:"Catch the warning signs before the problem spreads. Use visible crop signals, environmental indicators and farm memory to decide when closer inspection may be needed."
+  },
+
+  ms:{
+    eyebrow:"PROTOTAIP AMARAN AWAL TANAMAN",
+    title:"AgriScan Micro",
+    text:"Kesan tanda amaran sebelum masalah merebak. Gunakan tanda tanaman, petunjuk persekitaran dan rekod ladang untuk menentukan bila pemeriksaan lanjut diperlukan."
+  },
+
+  hi:{
+    eyebrow:"प्रारंभिक फसल चेतावनी प्रोटोटाइप",
+    title:"AgriScan Micro",
+    text:"समस्या फैलने से पहले चेतावनी संकेतों को पहचानें। फसल संकेतों और पर्यावरणीय जानकारी का उपयोग करके आगे निरीक्षण का निर्णय लें।"
+  },
+
+  ar:{
+    eyebrow:"نموذج أولي للإنذار المبكر للمحاصيل",
+    title:"AgriScan Micro",
+    text:"اكتشف علامات التحذير قبل انتشار المشكلة. استخدم إشارات المحصول والمؤشرات البيئية لتحديد الحاجة إلى فحص إضافي."
+  },
+
+  zh:{
+    eyebrow:"作物早期预警原型",
+    title:"AgriScan Micro",
+    text:"在问题扩大之前发现预警信号。结合可见作物迹象和环境指标，决定何时需要进一步检查。"
+  },
+
+  ta:{
+    eyebrow:"ஆரம்ப பயிர் எச்சரிக்கை முன்மாதிரி",
+    title:"AgriScan Micro",
+    text:"பிரச்சனை பரவுவதற்கு முன் எச்சரிக்கை அறிகுறிகளை கண்டறியுங்கள். பயிர் மற்றும் சுற்றுச்சூழல் குறியீடுகளைப் பயன்படுத்தி மேலதிக ஆய்வை தீர்மானிக்கவும்."
+  },
+
+  ja:{
+    eyebrow:"作物早期警告プロトタイプ",
+    title:"AgriScan Micro",
+    text:"問題が広がる前に警告サインを見つけます。作物の目に見える変化と環境指標を使って、詳しい確認が必要か判断します。"
+  },
+
+  ko:{
+    eyebrow:"작물 조기 경고 프로토타입",
+    title:"AgriScan Micro",
+    text:"문제가 널리 퍼지기 전에 경고 신호를 확인하세요. 작물의 변화와 환경 지표를 활용해 추가 점검이 필요한지 판단합니다."
+  }
+};
+
+function changeLanguage(){
+
+  const lang=document.getElementById("language").value;
+
+  const t=translations[lang];
+
+  document.getElementById("heroEyebrow").textContent=t.eyebrow;
+
+  document.getElementById("heroTitle").textContent=t.title;
+
+  document.getElementById("heroText").textContent=t.text;
+
+  document.documentElement.lang=lang;
+
+  if(lang==="ar"){
+    document.body.dir="rtl";
+  }else{
+    document.body.dir="ltr";
+  }
+
+  localStorage.setItem("language",lang);
+}
+
+
+/* =========================
+   MEMORY
+========================= */
+
+function updateMemory(){
+
+  const farm=localStorage.getItem("agriscanFarm");
+
+  const scan=localStorage.getItem("agriscanLastScan");
+
+  const events=localStorage.getItem("agriscanCalendar");
+
+  let count=0;
+
+  if(farm) count+=35;
+
+  if(scan) count+=35;
+
+  if(events) count+=30;
+
+  document.getElementById("memoryProgress").style.width=count+"%";
+
+  document.getElementById("memoryText").textContent=
+    count+
+    "% of the local prototype memory features are currently in use.";
+}
+
+function clearMemory(){
+
+  if(!confirm("Clear AgriScan Micro's saved local farm memory?")) return;
+
+  localStorage.removeItem("agriscanFarm");
+  localStorage.removeItem("agriscanLastScan");
+  localStorage.removeItem("agriscanCalendar");
+
+  calendarEvents={};
+
+  document.getElementById("farmName").value="";
+
+  updateSnapshot();
+  updateMemory();
+  renderCalendar();
+
+  alert("Local farm memory cleared.");
+}
+
+
+/* =========================
+   SHARE
+========================= */
+
+async function shareReport(){
+
+  const text=document.getElementById("report").innerText;
+
+  if(navigator.share){
+
+    try{
+      await navigator.share({
+        title:"AgriScan Micro Report",
+        text:text
+      });
+    }catch(e){}
+
+  }else{
+
+    try{
+
+      await navigator.clipboard.writeText(text);
+
+      alert("Report copied to clipboard!");
+
+    }catch(e){
+
+      alert("Sharing is not available in this browser.");
+
+    }
+  }
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+let gameRunning=false;
+let gameScore=0;
+let gameLives=3;
+let gameLevel=1;
+let gameTime=30;
+
+let tractor={
+  x:80,
+  y:300,
+  w:75,
+  h:45,
+  speed:6
+};
+
+let objects=[];
+let keys={};
+
+let gameTimer=null;
+let animationId=null;
+
+const evidence=["🌿","🔍","💧","📸","🌱"];
+const hazards=["🐛","🪨","☠️"];
+
+function startGame(){
+
+  cancelAnimationFrame(animationId);
+
+  clearInterval(gameTimer);
+
+  gameRunning=true;
+
+  gameScore=0;
+  gameLives=3;
+  gameLevel=1;
+  gameTime=30;
+
+  tractor.x=80;
+  tractor.y=300;
+
+  objects=[];
+
+  document.getElementById("gameScore").textContent=gameScore;
+  document.getElementById("gameLives").textContent=gameLives;
+  document.getElementById("gameLevel").textContent=gameLevel;
+  document.getElementById("gameTime").textContent=gameTime;
+
+  document.getElementById("gameMessage").textContent=
+    "🚜 Mission started! Collect evidence and avoid hazards!";
+
+  gameTimer=setInterval(()=>{
+
+    if(!gameRunning) return;
+
+    gameTime--;
+
+    document.getElementById("gameTime").textContent=gameTime;
+
+    if(gameTime<=0){
+
+      endGame(false);
+    }
+
+  },1000);
+
+  gameLoop();
+}
+
+function spawnObject(){
+
+  const isHazard=Math.random()<.27;
+
+  objects.push({
+
+    x:canvas.width+40,
+
+    y:Math.random()*(canvas.height-150)+70,
+
+    size:32,
+
+    speed:2.5+gameLevel*.6,
+
+    type:isHazard
+      ? hazards[Math.floor(Math.random()*hazards.length)]
+      : evidence[Math.floor(Math.random()*evidence.length)],
+
+    hazard:isHazard
+  });
+}
+
+function drawGame(){
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // sky
+  ctx.fillStyle="#bfe8ff";
+  ctx.fillRect(0,0,canvas.width,canvas.height*.55);
+
+  // ground
+  ctx.fillStyle="#7fc75b";
+  ctx.fillRect(0,canvas.height*.55,canvas.width,canvas.height*.45);
+
+  // soil lines
+  ctx.strokeStyle="rgba(90,110,50,.35)";
+  ctx.lineWidth=3;
+
+  for(let y=canvas.height*.65;y<canvas.height;y+=35){
+
+    ctx.beginPath();
+
+    for(let x=0;x<canvas.width;x+=50){
+
+      ctx.moveTo(x,y);
+      ctx.lineTo(x+25,y+5);
+    }
+
+    ctx.stroke();
+  }
+
+  // sun
+  ctx.font="55px sans-serif";
+  ctx.fillText("☀️",35,65);
+
+  // clouds
+  ctx.font="45px sans-serif";
+  ctx.fillText("☁️",240,75);
+  ctx.fillText("☁️",600,60);
+
+  // tractor
+  ctx.font="58px sans-serif";
+  ctx.fillText("🚜",tractor.x,tractor.y);
+
+  // objects
+  objects.forEach(obj=>{
+
+    ctx.font=obj.size+"px sans-serif";
+
+    ctx.fillText(
+      obj.type,
+      obj.x,
+      obj.y
+    );
+
+  });
+}
+
+function updateGame(){
+
+  if(keys.left) tractor.x-=tractor.speed;
+  if(keys.right) tractor.x+=tractor.speed;
+  if(keys.up) tractor.y-=tractor.speed;
+  if(keys.down) tractor.y+=tractor.speed;
+
+  tractor.x=Math.max(0,Math.min(canvas.width-80,tractor.x));
+
+  tractor.y=Math.max(70,Math.min(canvas.height-20,tractor.y));
+
+  if(Math.random()<.035+gameLevel*.006){
+    spawnObject();
+  }
+
+  objects.forEach(obj=>{
+    obj.x-=obj.speed;
+  });
+
+  objects=objects.filter(obj=>obj.x>-80);
+
+  // collisions
+  for(let i=objects.length-1;i>=0;i--){
+
+    const obj=objects[i];
+
+    const dx=Math.abs((tractor.x+35)-(obj.x+15));
+    const dy=Math.abs((tractor.y-20)-(obj.y-15));
+
+    if(dx<55 && dy<45){
+
+      if(obj.hazard){
+
+        gameLives--;
+
+        document.getElementById("gameLives").textContent=gameLives;
+
+        document.getElementById("gameMessage").textContent=
+          "⚠️ Hazard! Watch where you're driving!";
+
+        if(gameLives<=0){
+
+          endGame(false);
+          return;
+        }
+
+      }else{
+
+        gameScore+=10;
+
+        if(gameScore%50===0){
+
+          gameLevel++;
+
+          document.getElementById("gameLevel").textContent=gameLevel;
+
+          document.getElementById("gameMessage").textContent=
+            "🚜 LEVEL UP! Your Crop Detective skills are improving!";
+        }
+
+      }
+
+      objects.splice(i,1);
+    }
+  }
+
+  document.getElementById("gameScore").textContent=gameScore;
+}
+
+function gameLoop(){
+
+  if(!gameRunning) return;
+
+  updateGame();
+  drawGame();
+
+  animationId=requestAnimationFrame(gameLoop);
+}
+
+function endGame(won){
+
+  gameRunning=false;
+
+  clearInterval(gameTimer);
+  cancelAnimationFrame(animationId);
+
+  drawGame();
+
+  if(won){
+
+    document.getElementById("gameMessage").innerHTML=
+      "🏆 <strong>MISSION COMPLETE!</strong> Amazing Crop Detective work! Score: "+gameScore;
+
+  }else{
+
+    document.getElementById("gameMessage").innerHTML=
+      "🌱 <strong>Mission ended.</strong> Final score: "+gameScore+
+      ". Try again and beat your score!";
+  }
+}
+
+
+/* keyboard controls */
+
+window.addEventListener("keydown",e=>{
+
+  if(e.key==="ArrowLeft") keys.left=true;
+  if(e.key==="ArrowRight") keys.right=true;
+  if(e.key==="ArrowUp") keys.up=true;
+  if(e.key==="ArrowDown") keys.down=true;
+
+});
+
+window.addEventListener("keyup",e=>{
+
+  if(e.key==="ArrowLeft") keys.left=false;
+  if(e.key==="ArrowRight") keys.right=false;
+  if(e.key==="ArrowUp") keys.up=false;
+  if(e.key==="ArrowDown") keys.down=false;
+
+});
+
+
+/* touch buttons */
+
+function holdButton(id,key){
+
+  const button=document.getElementById(id);
+
+  button.addEventListener("pointerdown",()=>{
+    keys[key]=true;
+  });
+
+  button.addEventListener("pointerup",()=>{
+    keys[key]=false;
+  });
+
+  button.addEventListener("pointerleave",()=>{
+    keys[key]=false;
+  });
+
+  button.addEventListener("pointercancel",()=>{
+    keys[key]=false;
+  });
+}
+
+holdButton("leftBtn","left");
+holdButton("rightBtn","right");
+holdButton("upBtn","up");
+holdButton("downBtn","down");
+
+
+/* =========================
+   SECURITY HELPER
+========================= */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+/* =========================
+   STARTUP
+========================= */
+
+loadFarm();
+
+updateMemory();
+
+renderCalendar();
+
+document.getElementById("eventDate").value=todayKey();
+
+document.getElementById("eventDate").addEventListener("change",function(){
+
+  selectedDate=this.value;
+
+  const d=new Date(this.value+"T12:00:00");
+
+  calendarDate=new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    1
+  );
+
+  renderCalendar();
+});
+
+if(localStorage.getItem("largeText")==="true"){
+  document.body.classList.add("large-text");
+}
+
+if(localStorage.getItem("contrast")==="true"){
+  document.body.classList.add("high-contrast");
+}
+
+if(localStorage.getItem("simple")==="true"){
+  document.body.classList.add("simple");
+}
+
+const savedLanguage=localStorage.getItem("language");
+
+if(savedLanguage){
+
+  document.getElementById("language").value=savedLanguage;
+
+  changeLanguage();
+}
+
+drawGame();
+
+</script>
+
+</body>
+</html>
